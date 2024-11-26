@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Gaygrad</title>
-        <link rel="stylesheet" href="styles.css">
-	</head>
-	<body>
-        <h1>
-            <p>
-                Сайт любителей хадыжей
-            </p>
-        </h1>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaysite</title>
+</head>
+<body>
+    <p>Сайт любителей хадыжей</p>
+    <h1>Регистрация</h1>
+    <form id="registrationForm">
+        <label for="username">Никнейм:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
+
+    <script>
+        // Ваша конфигурация Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBuBaAHtVpODNpGEHSyiONcHeqGINN9TsE",
+            authDomain: "website-7e4e3.firebaseapp.com",
+            databaseURL: "https://website-7e4e3-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "website-7e4e3",
+            storageBucket: "website-7e4e3.firebasestorage.app",
+            messagingSenderId: "371625038226",
+            appId: "1:371625038226:web:6da99367fa545b0baf714b"
+        };
+
+        // Инициализация Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Обработка отправки формы
+        const form = document.getElementById('registrationForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Сохранение данных в Realtime Database
+            db.ref('users/').push({
+                username: username,
+                password: password
+            }).then(() => {
+                alert('Данные успешно сохранены!');
+            }).catch((error) => {
+                console.error('Ошибка:', error);
+            });
+        });
+    </script>
+</body>
 </html>
