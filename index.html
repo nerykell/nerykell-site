@@ -17,44 +17,5 @@
         <br><br>
         <button type="submit">Отправить</button>
     </form>
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
-
-    <script>
-        // Ваша конфигурация Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBuBaAHtVpODNpGEHSyiONcHeqGINN9TsE",
-            authDomain: "website-7e4e3.firebaseapp.com",
-            databaseURL: "https://website-7e4e3-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "website-7e4e3",
-            storageBucket: "website-7e4e3.firebasestorage.app",
-            messagingSenderId: "371625038226",
-            appId: "1:371625038226:web:6da99367fa545b0baf714b"
-        };
-
-        // Инициализация Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        // Обработка отправки формы
-        const form = document.getElementById('registrationForm');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Сохранение данных в Realtime Database
-            db.ref('users/').push({
-                username: username,
-                password: password
-            }).then(() => {
-                alert('Данные успешно сохранены!');
-            }).catch((error) => {
-                console.error('Ошибка:', error);
-            });
-        });
-    </script>
 </body>
 </html>
